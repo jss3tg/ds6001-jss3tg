@@ -14,7 +14,7 @@
     "href": "intro.html",
     "title": "1  Introduction",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee @knuth84 for additional discussion of literate programming.",
+    "text": "This is a book created from markdown and executable code.\nSee @knuth84 for additional discussion of literate programming.\n\nx &lt;- seq(-3,3,by=0.01)\ny &lt;- exp(x) + log(abs(x))\nplot(x,y)",
     "crumbs": [
       "<span class='chapter-number'>1</span>  <span class='chapter-title'>Introduction</span>"
     ]
@@ -37,6 +37,16 @@
     "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. (USA) 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
     "crumbs": [
       "References"
+    ]
+  },
+  {
+    "objectID": "HW1.html",
+    "href": "HW1.html",
+    "title": "3  Homework 1",
+    "section": "",
+    "text": "This is a book created from markdown and executable code.\nSee @knuth84 for additional discussion of literate programming.\nFavorite Graph\n\nx &lt;- seq(-3,3,by=0.01)\ny &lt;- exp(x) + log(abs(x))\nplot(x,y)\n\n\n\n\n\n\n\n\n\nrequire(ds6021b) # may need to be installed first pak::pak(\"thomasgstewart/ds6021b\")\n\nLoading required package: ds6021b\n\n\nWarning in library(package, lib.loc = lib.loc, character.only = TRUE,\nlogical.return = TRUE, : there is no package called 'ds6021b'",
+    "crumbs": [
+      "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 1</span>"
     ]
   }
 ]
