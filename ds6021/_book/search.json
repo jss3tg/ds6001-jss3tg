@@ -2,7 +2,7 @@
   {
     "objectID": "index.html",
     "href": "index.html",
-    "title": "ds6021 Quarto Book",
+    "title": "Intro to Prediction Modeling",
     "section": "",
     "text": "Preface\nThis is a Quarto book.\nTo learn more about Quarto books visit https://quarto.org/docs/books.",
     "crumbs": [
@@ -30,21 +30,11 @@
     ]
   },
   {
-    "objectID": "references.html",
-    "href": "references.html",
-    "title": "References",
-    "section": "",
-    "text": "Knuth, Donald E. 1984. “Literate Programming.” Comput.\nJ. (USA) 27 (2): 97–111. https://doi.org/10.1093/comjnl/27.2.97.",
-    "crumbs": [
-      "References"
-    ]
-  },
-  {
     "objectID": "HW1.html",
     "href": "HW1.html",
     "title": "3  Homework 1",
     "section": "",
-    "text": "This is a book created from markdown and executable code.\nSee @knuth84 for additional discussion of literate programming.\nFavorite Graph\n\nx &lt;- seq(-3,3,by=0.01)\ny &lt;- exp(x) + log(abs(x))\nplot(x,y)\n\n\n\n\n\n\n\n\n\nrequire(ds6021b) # may need to be installed first pak::pak(\"thomasgstewart/ds6021b\")\n\nLoading required package: ds6021b\n\n\nWarning in library(package, lib.loc = lib.loc, character.only = TRUE,\nlogical.return = TRUE, : there is no package called 'ds6021b'",
+    "text": "This is a book created from markdown and executable code.\nSee @knuth84 for additional discussion of literate programming.\nFavorite Graph\n\nx &lt;- seq(-3,3,by=0.01)\ny &lt;- exp(x) + log(abs(x))\nplot(x,y)\n\n\n\n\n\n\n\n\n\n4 Question 2\n\n# pak::pak(\"thomasgstewart/ds6021b\")\n\nrequire(ds6021b)\n\nLoading required package: ds6021b\n\nR1 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nplot(R1[,1], f1(R1), xlab = \"x1\", ylab = \"y\", type = \"l\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0\", box.lty = 0)\n\n\n\n\n\n\n\nR2 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nplot(R2[,1], f2(R2), xlab = \"x1\", ylab = \"y\", type = \"l\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0\", box.lty = 0)\n\n\n\n\n\n\n\nR3 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nplot(R3[,1], f3(R3), xlab = \"x1\", ylab = \"y\", type = \"l\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0\", box.lty = 0)\n\n\n\n\n\n\n\nR4 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nplot(R4[,1], f4(R4), xlab = \"x1\", ylab = \"y\", type = \"l\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0\", box.lty = 0)\n\n\n\n\n\n\n\nR5 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nplot(R5[,1], f5(R5), xlab = \"x1\", ylab = \"y\", type = \"l\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0\", box.lty = 0)\n\n\n\n\n\n\n\n\n\n\n5 Question 3\n\nR1_0 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nR1_1 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 1)\nplot(R1_0[,1], f1(R1_0), xlab = \"x1\", ylab = \"y\", ylim = c(-1,4),type = \"l\")\nlines(R1_1[,1], f1(R1_1), xlab = \"x1\", ylab = \"y\", type = \"l\", col = \"red\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0 or 1\", box.lty = 0)\n\n\n\n\n\n\n\nR2_0 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nR2_1 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 1)\nplot(R2_0[,1], f2(R2_0), xlab = \"x1\", ylab = \"y\", ylim = c(-1,4),type = \"l\")\nlines(R2_1[,1], f2(R2_1), xlab = \"x1\", ylab = \"y\", type = \"l\", col = \"red\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0 or 1\", box.lty = 0)\n\n\n\n\n\n\n\nR3_0 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nR3_1 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 1)\nplot(R3_0[,1], f3(R3_0), xlab = \"x1\", ylab = \"y\", ylim = c(-1,4),type = \"l\")\nlines(R3_1[,1], f3(R3_1), xlab = \"x1\", ylab = \"y\", type = \"l\", col = \"red\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0 or 1\", box.lty = 0)\n\n\n\n\n\n\n\nR4_0 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nR4_1 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 1)\nplot(R4_0[,1], f4(R4_0), xlab = \"x1\", ylab = \"y\", ylim = c(-1,4),type = \"l\")\nlines(R4_1[,1], f4(R4_1), xlab = \"x1\", ylab = \"y\", type = \"l\", col = \"red\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0 or 1\", box.lty = 0)\n\n\n\n\n\n\n\nR5_0 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 0)\nR5_1 &lt;- expand.grid(x1 = seq(-3,3,by=0.01), x2 = -0.5, x3 = 1)\nplot(R5_0[,1], f5(R5_0), xlab = \"x1\", ylab = \"y\", ylim = c(-1,4),type = \"l\")\nlines(R5_1[,1], f5(R5_1), xlab = \"x1\", ylab = \"y\", type = \"l\", col = \"red\")\nlegend(\"topleft\", legend = \"x2 = -0.5 & x3 = 0 or 1\", box.lty = 0)\n\n\n\n\n\n\n\n\n\n\n6 Question 4\nFor the most part, a visual glance indicates that x3 with value 1 has higher y values than x3 with value 0. Although the results do vary in the final curve/outcome, the general shape of these plots are retained.",
     "crumbs": [
       "<span class='chapter-number'>3</span>  <span class='chapter-title'>Homework 1</span>"
     ]
