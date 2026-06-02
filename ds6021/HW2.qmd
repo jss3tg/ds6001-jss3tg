@@ -1,0 +1,105 @@
+# Homework 1
+
+
+# Question 1
+```{r}
+#pak::pak("thomasgstewart/ds6021c")
+library(ds6021b)
+library(ds6021c)
+
+set.seed(23583)
+
+d <- external_data(n=1000)
+
+for (fi in c("f1", "f2", "f3", "f4", "f5")) {
+    par(mfrow = c(1, 2))
+    for (grp in c(0, 1)) {
+        idx <- d$x3 == grp
+        preds <- get(fi)(d)[idx]
+        obs <- d$y[idx]
+        plot(preds, obs,
+            xlab = "Predicted", ylab = "Observed",
+            main = paste0(fi, " (x3 = ", grp, ")"),
+            pch = 16, col = "#00000030", asp = 1)
+        
+        lines(lowess(preds, obs), lwd = 2, col = "blue")
+        abline(0, 1, lty = 2, col = "red")
+    }
+    par(mfrow = c(1, 1))
+}
+```
+# Question 2
+```{r}
+
+for (fi in c("f1","f2", "f3", "f4", "f5")) {
+  resid_fi <- get(fi)(d) - d$y
+  hist(resid_fi,
+       main = paste0("Residuals: ", fi),
+       xlab = "Residual (predicted - observed)",
+       col = "gray80", border = "white",
+       breaks = 30,
+       freq = FALSE)
+  lines(density(resid_fi), lwd = 3)
+  abline(v = mean(resid_fi), lty = 1, lwd = 2, col = "red")
+}
+```
+
+# Question 3
+
+## MSE
+```{r}
+set.seed(1)
+d <- external_data(1000)
+
+mse_vals <- sapply(c("f1","f2","f3","f4","f5"), function(fi) {
+  mean((get(fi)(d) - d$y)^2)
+})
+
+plot(1:5, mse_vals,
+        ylab = "Mean Squared Error",
+        main = "Expected Squared Error by Model",
+        col = "steelblue",
+        ylim = c(0,max(mse_vals)),
+        pch = 16,
+        cex = 1.5,
+        xaxt = "n")
+axis(1, 1:5, c("f1","f2","f3","f4","f5"))
+```
+
+## MAE
+```{r}
+mae_vals <- sapply(c("f1","f2","f3","f4","f5"), function(fi) {
+  quantile(abs(get(fi)(d) - d$y), probs = 0.9)
+})
+
+plot(1:5, mae_vals,
+        ylab = "Mean Squared Error",
+        main = "Expected Absolute Error by Model",
+        col = "steelblue",
+        ylim = c(0,max(mae_vals)),
+        pch = 16,
+        cex = 1.5,
+        xaxt = "n")
+axis(1, 1:5, c("f1","f2","f3","f4","f5"))
+```
+
+## q90
+```{r}
+q90_vals <- sapply(c("f1","f2","f3","f4","f5"), function(fi) {
+  mean(abs(get(fi)(d) - d$y))
+})
+
+plot(1:5, q90_vals,
+        ylab = "90th Quantile",
+        main = "Expected 90th Quantile by Model",
+        col = "steelblue",
+        ylim = c(0,max(q90_vals)),
+        pch = 16,
+        cex = 1.5,
+        xaxt = "n")
+axis(1, 1:5, c("f1","f2","f3","f4","f5"))
+```
+
+# Question 4
+
+One Measure of Discrimination would be rank correlation. This is done by ranking the predicted and true values and then calculating the correlation between each respective rank. The level of rank correlation would show the level of discrimination where each predicted value is sorted to compare with the true values.
