@@ -42,41 +42,41 @@
   {
     "objectID": "HW2.html",
     "href": "HW2.html",
-    "title": "4  Homework 1",
+    "title": "4  Homework 2",
     "section": "",
     "text": "5 Question 1\n#pak::pak(\"thomasgstewart/ds6021c\")\nlibrary(ds6021b)\nlibrary(ds6021c)\n\nset.seed(23583)\n\nd &lt;- external_data(n=1000)\n\nfor (fi in c(\"f1\", \"f2\", \"f3\", \"f4\", \"f5\")) {\n    par(mfrow = c(1, 2))\n    for (grp in c(0, 1)) {\n        idx &lt;- d$x3 == grp\n        preds &lt;- get(fi)(d)[idx]\n        obs &lt;- d$y[idx]\n        plot(preds, obs,\n            xlab = \"Predicted\", ylab = \"Observed\",\n            main = paste0(fi, \" (x3 = \", grp, \")\"),\n            pch = 16, col = \"#00000030\", asp = 1)\n        \n        lines(lowess(preds, obs), lwd = 2, col = \"blue\")\n        abline(0, 1, lty = 2, col = \"red\")\n    }\n    par(mfrow = c(1, 1))\n}",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 1</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 2</span>"
     ]
   },
   {
     "objectID": "HW2.html#mse",
     "href": "HW2.html#mse",
-    "title": "4  Homework 1",
+    "title": "4  Homework 2",
     "section": "7.1 MSE",
     "text": "7.1 MSE\n\nset.seed(1)\nd &lt;- external_data(1000)\n\nmse_vals &lt;- sapply(c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"), function(fi) {\n  mean((get(fi)(d) - d$y)^2)\n})\n\nplot(1:5, mse_vals,\n        ylab = \"Mean Squared Error\",\n        main = \"Expected Squared Error by Model\",\n        col = \"steelblue\",\n        ylim = c(0,max(mse_vals)),\n        pch = 16,\n        cex = 1.5,\n        xaxt = \"n\")\naxis(1, 1:5, c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"))",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 1</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 2</span>"
     ]
   },
   {
     "objectID": "HW2.html#mae",
     "href": "HW2.html#mae",
-    "title": "4  Homework 1",
+    "title": "4  Homework 2",
     "section": "7.2 MAE",
     "text": "7.2 MAE\n\nmae_vals &lt;- sapply(c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"), function(fi) {\n  quantile(abs(get(fi)(d) - d$y), probs = 0.9)\n})\n\nplot(1:5, mae_vals,\n        ylab = \"Mean Squared Error\",\n        main = \"Expected Absolute Error by Model\",\n        col = \"steelblue\",\n        ylim = c(0,max(mae_vals)),\n        pch = 16,\n        cex = 1.5,\n        xaxt = \"n\")\naxis(1, 1:5, c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"))",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 1</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 2</span>"
     ]
   },
   {
     "objectID": "HW2.html#q90",
     "href": "HW2.html#q90",
-    "title": "4  Homework 1",
+    "title": "4  Homework 2",
     "section": "7.3 q90",
     "text": "7.3 q90\n\nq90_vals &lt;- sapply(c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"), function(fi) {\n  mean(abs(get(fi)(d) - d$y))\n})\n\nplot(1:5, q90_vals,\n        ylab = \"90th Quantile\",\n        main = \"Expected 90th Quantile by Model\",\n        col = \"steelblue\",\n        ylim = c(0,max(q90_vals)),\n        pch = 16,\n        cex = 1.5,\n        xaxt = \"n\")\naxis(1, 1:5, c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"))",
     "crumbs": [
-      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 1</span>"
+      "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 2</span>"
     ]
   }
 ]
