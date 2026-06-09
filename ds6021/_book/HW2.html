@@ -68,7 +68,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./references.html" rel="next">
+<link href="./HW3.html" rel="next">
 <link href="./HW1.html" rel="prev">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -173,6 +173,12 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <div class="sidebar-item-container"> 
   <a href="./HW2.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">Homework 2</span></span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./HW3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Homework 3</span></span></a>
   </div>
 </li>
         <li class="sidebar-item">
@@ -374,7 +380,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="7.2" class="anchored" data-anchor-id="mae"><span class="header-section-number">7.2</span> MAE</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>mae_vals <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">"f1"</span>,<span class="st">"f2"</span>,<span class="st">"f3"</span>,<span class="st">"f4"</span>,<span class="st">"f5"</span>), <span class="cf">function</span>(fi) {</span>
-<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="fu">abs</span>(<span class="fu">get</span>(fi)(d) <span class="sc">-</span> d<span class="sc">$</span>y), <span class="at">probs =</span> <span class="fl">0.9</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">abs</span>(<span class="fu">get</span>(fi)(d) <span class="sc">-</span> d<span class="sc">$</span>y))</span>
 <span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, mae_vals,</span>
@@ -399,7 +405,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 data-number="7.3" class="anchored" data-anchor-id="q90"><span class="header-section-number">7.3</span> q90</h2>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>q90_vals <span class="ot">&lt;-</span> <span class="fu">sapply</span>(<span class="fu">c</span>(<span class="st">"f1"</span>,<span class="st">"f2"</span>,<span class="st">"f3"</span>,<span class="st">"f4"</span>,<span class="st">"f5"</span>), <span class="cf">function</span>(fi) {</span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mean</span>(<span class="fu">abs</span>(<span class="fu">get</span>(fi)(d) <span class="sc">-</span> d<span class="sc">$</span>y))</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">quantile</span>(<span class="fu">abs</span>(<span class="fu">get</span>(fi)(d) <span class="sc">-</span> d<span class="sc">$</span>y), <span class="at">probs =</span> <span class="fl">0.9</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>})</span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="fu">plot</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">5</span>, q90_vals,</span>
@@ -836,8 +842,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./references.html" class="pagination-link" aria-label="References">
-        <span class="nav-page-text">References</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="./HW3.html" class="pagination-link" aria-label="Homework 3">
+        <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Homework 3</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

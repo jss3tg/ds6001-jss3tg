@@ -64,7 +64,7 @@
     "href": "HW2.html#mae",
     "title": "4  Homework 2",
     "section": "7.2 MAE",
-    "text": "7.2 MAE\n\nmae_vals &lt;- sapply(c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"), function(fi) {\n  quantile(abs(get(fi)(d) - d$y), probs = 0.9)\n})\n\nplot(1:5, mae_vals,\n        ylab = \"Mean Squared Error\",\n        main = \"Expected Absolute Error by Model\",\n        col = \"steelblue\",\n        ylim = c(0,max(mae_vals)),\n        pch = 16,\n        cex = 1.5,\n        xaxt = \"n\")\naxis(1, 1:5, c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"))",
+    "text": "7.2 MAE\n\nmae_vals &lt;- sapply(c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"), function(fi) {\n  mean(abs(get(fi)(d) - d$y))\n})\n\nplot(1:5, mae_vals,\n        ylab = \"Mean Squared Error\",\n        main = \"Expected Absolute Error by Model\",\n        col = \"steelblue\",\n        ylim = c(0,max(mae_vals)),\n        pch = 16,\n        cex = 1.5,\n        xaxt = \"n\")\naxis(1, 1:5, c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"))",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 2</span>"
     ]
@@ -74,9 +74,19 @@
     "href": "HW2.html#q90",
     "title": "4  Homework 2",
     "section": "7.3 q90",
-    "text": "7.3 q90\n\nq90_vals &lt;- sapply(c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"), function(fi) {\n  mean(abs(get(fi)(d) - d$y))\n})\n\nplot(1:5, q90_vals,\n        ylab = \"90th Quantile\",\n        main = \"Expected 90th Quantile by Model\",\n        col = \"steelblue\",\n        ylim = c(0,max(q90_vals)),\n        pch = 16,\n        cex = 1.5,\n        xaxt = \"n\")\naxis(1, 1:5, c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"))",
+    "text": "7.3 q90\n\nq90_vals &lt;- sapply(c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"), function(fi) {\n  quantile(abs(get(fi)(d) - d$y), probs = 0.9)\n})\n\nplot(1:5, q90_vals,\n        ylab = \"90th Quantile\",\n        main = \"Expected 90th Quantile by Model\",\n        col = \"steelblue\",\n        ylim = c(0,max(q90_vals)),\n        pch = 16,\n        cex = 1.5,\n        xaxt = \"n\")\naxis(1, 1:5, c(\"f1\",\"f2\",\"f3\",\"f4\",\"f5\"))",
     "crumbs": [
       "<span class='chapter-number'>4</span>  <span class='chapter-title'>Homework 2</span>"
+    ]
+  },
+  {
+    "objectID": "HW3.html",
+    "href": "HW3.html",
+    "title": "5  Homework 3",
+    "section": "",
+    "text": "6 Question 1\n\n#pak::pak(\"thomasgstewart/ds6021d\")\nlibrary(ds6021d)\n\nset.seed(2343)\nv &lt;- external_data(20000)\ny_v &lt;- v$y\na_mae &lt;- rep(NA, 100)\ne_mae &lt;- rep(NA, 100)\n#yhat_v &lt;- f(v)\n#mae_v &lt;- mean(abs(yhat_v-y_v))\n\nfor(i in 1:100) {\n  f &lt;- m[[i]]\n  d &lt;- td[[i]]\n  y &lt;- d$y\n  \n  yhat_a &lt;- f(d)\n  a_mae[i] &lt;- mean(abs(yhat_a - y))\n  \n  # External MAE\n  yhat_e &lt;- f(v)\n  e_mae[i] &lt;- mean(abs(yhat_e - y_v))\n}\n\nplot(a_mae, e_mae, \n     main = \"apparent vs external MAE\", \n     xlab = \"apparent MAE\", \n     ylab = \"external MAE\")\n\n\n\n\n\n\n\n\nThe external MAE error is generally higher than the apparent MAE error. The external uses new data to fit the model, while apparent was using the original data.\n\n\n7 Question 2\n\noptimism &lt;- a_mae - e_mae\nplot(optimism, \n     main = \"optimism of MAE\", \n     xlab = \"apparent MAE - external MAE\")\n\n\n\n\n\n\n\nhist(optimism, \n     main = \"optimism of MAE\", \n     xlab = \"apparent MAE - external MAE\")\n\n\n\n\n\n\n\nmean(optimism)\n\n[1] -0.2455164\n\n\nThe optimism is mostly negative, along with the mean being negative. Based on the plots, the data is mostly symetric on the plot but slightly left skewed on the histogram. This mostly shows that our apparent data was providing more optimistic data than external.\n\n\n8 Question 3\n\nd &lt;- td[[1]]\nn &lt;- nrow(d)\nK &lt;- 10\n\nset.seed(125323)\nfold_id &lt;- sample(rep(1:K, length.out = n))\n\ncv_mae &lt;- rep(NA, K)\nfor (k in 1:K) {\n  train  &lt;- d[fold_id != k, ]\n  test   &lt;- d[fold_id == k, ]\n  fit    &lt;- lm(y ~ ., data = train)\n  yhat   &lt;- predict(fit, newdata = test)\n  cv_mae[k] &lt;- mean(abs(yhat - test$y))\n}\n\nmean(cv_mae)\n\n[1] 0.9158298\n\n\n\n\n9 Question 4\n\nB &lt;- 200\n\nset.seed(42352)\noptimism_b &lt;- rep(NA,B)\n\nfit_a &lt;- lm(y ~ ., data = d)\nmae_a &lt;- mean(abs(predict(fit_a) - d$y))\n\nfor (b in 1:B) {\n  idx    &lt;- sample(1:n, replace = TRUE)\n  boot_d &lt;- d[idx, ]\n\n  fit_b     &lt;- lm(y ~ ., data = boot_d)\n\n  yhat_app  &lt;- predict(fit_b, newdata = boot_d)\n  mae_app   &lt;- mean(abs(yhat_app  - boot_d$y))\n\n  yhat_orig &lt;- predict(fit_b, newdata = d)\n  mae_orig  &lt;- mean(abs(yhat_orig - d$y))\n\n  optimism_b[b] &lt;- mae_app - mae_orig\n}\n\nboot_corrected_mae &lt;- mae_a - mean(optimism_b)\n\ncat(\"apparent MAE:\", mae_a, \",\",\"estimated Optimism:\", mean(optimism_b), \",\",\"corrected MAE:\", boot_corrected_mae)\n\napparent MAE: 0.6767684 , estimated Optimism: -0.2098636 , corrected MAE: 0.8866319\n\n#mae_v",
+    "crumbs": [
+      "<span class='chapter-number'>5</span>  <span class='chapter-title'>Homework 3</span>"
     ]
   }
 ]

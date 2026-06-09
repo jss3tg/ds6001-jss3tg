@@ -1,0 +1,104 @@
+# Homework 3
+
+
+# Question 1
+```{r}
+#pak::pak("thomasgstewart/ds6021d")
+library(ds6021d)
+
+set.seed(2343)
+v <- external_data(20000)
+y_v <- v$y
+a_mae <- rep(NA, 100)
+e_mae <- rep(NA, 100)
+#yhat_v <- f(v)
+#mae_v <- mean(abs(yhat_v-y_v))
+
+for(i in 1:100) {
+  f <- m[[i]]
+  d <- td[[i]]
+  y <- d$y
+  
+  yhat_a <- f(d)
+  a_mae[i] <- mean(abs(yhat_a - y))
+  
+  # External MAE
+  yhat_e <- f(v)
+  e_mae[i] <- mean(abs(yhat_e - y_v))
+}
+
+plot(a_mae, e_mae, 
+     main = "apparent vs external MAE", 
+     xlab = "apparent MAE", 
+     ylab = "external MAE")
+```
+The external MAE error is generally higher than the apparent MAE error. The external uses new data to fit the model, while apparent was using the original data.
+
+# Question 2
+```{r}
+optimism <- a_mae - e_mae
+plot(optimism, 
+     main = "optimism of MAE", 
+     xlab = "apparent MAE - external MAE")
+hist(optimism, 
+     main = "optimism of MAE", 
+     xlab = "apparent MAE - external MAE")
+mean(optimism)
+```
+
+The optimism is mostly negative, along with the mean being negative. Based on the plots, the data is mostly symetric on the plot but slightly left skewed on the histogram. This mostly shows that our apparent data was providing more optimistic data than external.
+
+# Question 3
+```{r}
+d <- td[[1]]
+n <- nrow(d)
+K <- 10
+
+set.seed(125323)
+fold_id <- sample(rep(1:K, length.out = n))
+
+cv_mae <- rep(NA, K)
+for (k in 1:K) {
+  train  <- d[fold_id != k, ]
+  test   <- d[fold_id == k, ]
+  fit    <- lm(y ~ ., data = train)
+  yhat   <- predict(fit, newdata = test)
+  cv_mae[k] <- mean(abs(yhat - test$y))
+}
+
+mean(cv_mae)
+```
+
+
+# Question 4
+
+```{r}
+B <- 200
+
+set.seed(42352)
+optimism_b <- rep(NA,B)
+
+fit_a <- lm(y ~ ., data = d)
+mae_a <- mean(abs(predict(fit_a) - d$y))
+
+for (b in 1:B) {
+  idx    <- sample(1:n, replace = TRUE)
+  boot_d <- d[idx, ]
+
+  fit_b     <- lm(y ~ ., data = boot_d)
+
+  yhat_app  <- predict(fit_b, newdata = boot_d)
+  mae_app   <- mean(abs(yhat_app  - boot_d$y))
+
+  yhat_orig <- predict(fit_b, newdata = d)
+  mae_orig  <- mean(abs(yhat_orig - d$y))
+
+  optimism_b[b] <- mae_app - mae_orig
+}
+
+boot_corrected_mae <- mae_a - mean(optimism_b)
+
+cat("apparent MAE:", mae_a, ",","estimated Optimism:", mean(optimism_b), ",","corrected MAE:", boot_corrected_mae)
+
+#mae_v
+```
